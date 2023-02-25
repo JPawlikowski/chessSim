@@ -2,6 +2,8 @@
 from chessSimFuncs import checkPos
 from chessSimFuncs import movePiece
 from chessSimFuncs import displayBoard
+from chessSimFuncs import sanitizeInput
+from chessSimFuncs import findPiecePos
 
 print("Starting chess simulation")
 print("Input format is : <PieceName> <TargetX> <TargetY")
@@ -14,10 +16,28 @@ displayBoard(board)
 
 userInput = input('\n' + "-> ")
 while userInput != 'Q':
-    inputParsed = userInput.split(' ')
+    inputParsed, sanitizeResult = sanitizeInput(userInput)
+    if sanitizeResult != 0:
+        print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
+        userInput = input('\n' + "-> ")
+        continue
     currPiece = inputParsed[0]
     targetPosX = int(inputParsed[1])
     targetPosY = int(inputParsed[2])
+
+    currPiecePosX, currPiecePosY = findPiecePos(board, currPiece)
+    if (currPiecePosX == -1 or currPiecePosY == -1):
+        print("Entered piece : " + currPiece + " not found on the board")
+        print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
+        userInput = input('\n' + "-> ")
+        continue
+
+    if currPiecePosX == targetPosX and currPiecePosY == targetPosY:
+        print("Piece " + currPiece + " current (" + str(currPiecePosX) + ", " + str(currPiecePosY) + ") and target (" + str(targetPosX) + ", " + str(targetPosY) + ") positions are the same")
+        print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
+        userInput = input('\n' + "-> ")
+        continue
+    
     movePiece(board, currPiece, targetPosX, targetPosY)
     displayBoard(board)
     userInput = input('\n' + "-> ")
