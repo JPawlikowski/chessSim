@@ -4,6 +4,7 @@ from chessSimFuncs import movePiece
 from chessSimFuncs import displayBoard
 from chessSimFuncs import sanitizeInput
 from chessSimFuncs import findPiecePos
+from chessSimFuncs import checkMove
 
 print("Starting chess simulation")
 print("Input format is : <PieceName> <TargetX> <TargetY")
@@ -22,8 +23,8 @@ while userInput != 'Q':
         userInput = input('\n' + "-> ")
         continue
     currPiece = inputParsed[0]
-    targetPosX = int(inputParsed[1])
-    targetPosY = int(inputParsed[2])
+    targetPosX = int(inputParsed[2])
+    targetPosY = int(inputParsed[1])
 
     currPiecePosX, currPiecePosY = findPiecePos(board, currPiece)
     if (currPiecePosX == -1 or currPiecePosY == -1):
@@ -37,7 +38,10 @@ while userInput != 'Q':
         print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
         userInput = input('\n' + "-> ")
         continue
-    
+
+    #movePosX, movePosY = checkMove(board, currPiece)
+    #print("Potential move : " + str(movePosX) + ", " + str(movePosY) )
+
     movePiece(board, currPiece, targetPosX, targetPosY)
     displayBoard(board)
     userInput = input('\n' + "-> ")

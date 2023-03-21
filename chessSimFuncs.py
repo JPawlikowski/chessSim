@@ -5,6 +5,7 @@ def movePiece(board, piece, targetPosX, targetPosY):
 
     updatePos(board, piece, targetPosX, targetPosY)
 
+#Given board and piece find current piece position
 def findPiecePos(board, piece):
     for i in range(0, len(board)):
         for j in range(0, len(board[i])):
@@ -54,8 +55,14 @@ def checkMove(board, piece):
     else:
         print("current piece is not a pawn")
 
+#User input should be in format 'A1'
+def posTranslate():
+    columns = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'G']
+
+
 #Display board in visual manner, note reversed sequence as 0,0 is bottom left
 def displayBoard(board):
+    columns = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'G']
     for i in range(len(board)-1, -1, -1):
         for j in range(0, len(board[i])):
             print(' | ', end='')
@@ -63,6 +70,20 @@ def displayBoard(board):
             if (j == len(board[i])-1):
                 print(' | ', end='')
         print('\n')
-        for h in range(0, 18):
+
+        for h in range(0, len(board[0])*4 + 2):  #note this lenth might depend on size of board, testing with like a 5/5
             print(' - ', end='')
+        
+        if (i == 0):
+            print('\n')
+            for g in range(0, len(board[0])):  #note this lenth might depend on size of board, testing with like a 5/5
+                if (g == 0):
+                    print('   ', end='')
+                print(columns[g].center(10, ' '), end='')
+
+                print('   ', end='')
+        #if (dashCount / 2 == 0):
+        ##        print(' ' + columns[colNum] + ' ', end='')
+        #        colNum = colNum + 1
+        #        continue
         print('\n')
