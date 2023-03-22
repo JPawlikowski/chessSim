@@ -64,18 +64,26 @@ def posTranslate():
 def displayBoard(board):
     columns = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'G']
     for i in range(len(board)-1, -1, -1):
+        print('  ', end='')
+        for h in range(0, len(board[0])*4 + 2):  #note this lenth might depend on size of board, testing with like a 5/5
+            print(' - ', end='')
+        print('\n')
+
         for j in range(0, len(board[i])):
+            if (j == 0):
+                print(str(i), end='')
             print(' | ', end='')
             print(board[i][j].center(10, ' '), end='')
             if (j == len(board[i])-1):
                 print(' | ', end='')
-        print('\n')
-
-        for h in range(0, len(board[0])*4 + 2):  #note this lenth might depend on size of board, testing with like a 5/5
-            print(' - ', end='')
         
         if (i == 0):
             print('\n')
+            print('  ', end='')
+            for h in range(0, len(board[0])*4 + 2):  #note this lenth might depend on size of board, testing with like a 5/5
+                print(' - ', end='')
+            print('\n')
+            
             for g in range(0, len(board[0])):  #note this lenth might depend on size of board, testing with like a 5/5
                 if (g == 0):
                     print('   ', end='')
