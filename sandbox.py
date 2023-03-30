@@ -13,9 +13,12 @@ print("Input format is : <PieceName> <TargetX> <TargetY")
 print("Enter 'Q' to exit")
 
 board = [['WPawn1', 'WPawn2', 'WPawn3', 'WPawn4'],[' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BPawn1', 'BPawn2', 'BPawn3', 'BPawn4']]
+currentMoveWhite = True
 
 print("Starting board : " + '\n')
 displayBoard(board)
+
+print("White to move")
 
 userInput = input('\n' + "-> ")
 while userInput != 'Q':
@@ -26,6 +29,37 @@ while userInput != 'Q':
         userInput = input('\n' + "-> ")
         continue
     currPiece = inputParsed[0]
+
+    if (currentMoveWhite == True):
+        if currPiece[0] == 'W':
+            pass
+        elif (currPiece[0] == 'B'):
+            print("Current move is for WHITE")
+            print("Re-enter : expected format is : <piece> <targetPosCol> <targetPosRow>")
+            print("Enter 'Q' to exit")
+            userInput = input('\n' + "-> ")
+            continue
+        else:
+            print("Invalid color - first character of piece name defines the color")
+            print("Re-enter : expected format is : <piece> <targetPosCol> <targetPosRow>")
+            print("Enter 'Q' to exit")
+            userInput = input('\n' + "-> ")
+            continue
+    else:
+        if (currPiece[0] == 'B'):
+            pass
+        elif (currPiece[0] == 'W'):
+            print("Current move is for BLACK")
+            print("Re-enter : expected format is : <piece> <targetPosCol> <targetPosRow>")
+            print("Enter 'Q' to exit")
+            userInput = input('\n' + "-> ")
+            continue
+        else:
+            print("Invalid color - first character of piece name defines the color")
+            print("Re-enter : expected format is : <piece> <targetPosCol> <targetPosRow>")
+            print("Enter 'Q' to exit")
+            userInput = input('\n' + "-> ")
+            continue
     
     targetPosColStr = inputParsed[1]
     targetPosCol = posTranslateStrToInt(targetPosColStr)
@@ -50,7 +84,6 @@ while userInput != 'Q':
         userInput = input('\n' + "-> ")
         continue
 
-    
     movePosRow, movePosCol = checkMove(board, currPiece)
     print("Potential move : " + str(movePosRow) + ", " + str(movePosCol) )
     
@@ -65,5 +98,13 @@ while userInput != 'Q':
     #movePiece(board, currPiece, targetPosRow, targetPosCol)
     displayBoard(board)
     print(board)
+    if (currentMoveWhite == True):
+        currentMoveWhite = False
+        print("Black to move")
+        userInput = input('\n' + "-> ")
+        continue
+    else:
+        currentMoveWhite = True
+        print("White to move")
     userInput = input('\n' + "-> ")
 

@@ -46,25 +46,31 @@ def checkPos(board, targetPosRow, targetPosCol):
     return currentPosPiece
 
 #Determine potential allowed moves for a given piece
+#Note for a white pawn this is +1 however for a black pawn its -1
 def checkMove(board, piece):
     #Need to define available moves for all piece types including borders
-    if 'pawn' in piece.lower():
-        currPosRow, currPosCol = findPiecePos(board, piece)
-        availPosCol = currPosCol
-        availPosRow = currPosRow + 1
-        return availPosRow, availPosCol
+    if ('pawn' in piece.lower()):
+        if (piece[0] == 'W'):
+            currPosRow, currPosCol = findPiecePos(board, piece)
+            availPosCol = currPosCol
+            availPosRow = currPosRow + 1
+            return availPosRow, availPosCol
+        else:
+            currPosRow, currPosCol = findPiecePos(board, piece)
+            availPosCol = currPosCol
+            availPosRow = currPosRow - 1
+            return availPosRow, availPosCol
     else:
         print("current piece is not a pawn")
-        return 0, 0
+        return -1, -1
 
 def posTranslateStrToInt(targetPosColStr):
     columns = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'G']
     for i in range(0, len(columns)):
-        if columns[i] == targetPosColStr:
+        if (columns[i] == targetPosColStr):
             return i
-        else:
-            print("entry for column not found in available options : " + str(columns))
-            return -1
+    print("entry for column not found in available options : " + str(columns))
+    return -1
 
 #Is this required? 
 #Might be able to hold the Int and Str in local vars in the main runner..
