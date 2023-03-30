@@ -5,6 +5,8 @@ from chessSimFuncs import displayBoard
 from chessSimFuncs import sanitizeInput
 from chessSimFuncs import findPiecePos
 from chessSimFuncs import checkMove
+from chessSimFuncs import posTranslateStrToInt  
+from chessSimFuncs import posTranslateIntToStr
 
 print("Starting chess simulation")
 print("Input format is : <PieceName> <TargetX> <TargetY")
@@ -19,30 +21,49 @@ userInput = input('\n' + "-> ")
 while userInput != 'Q':
     inputParsed, sanitizeResult = sanitizeInput(userInput)
     if sanitizeResult != 0:
-        print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
+        print("Re-enter : expected format is : <piece> <targetPosCol> <targetPosRow>")
+        print("Enter 'Q' to exit")
         userInput = input('\n' + "-> ")
         continue
     currPiece = inputParsed[0]
-    targetPosX = int(inputParsed[2])
-    targetPosY = int(inputParsed[1])
+    
+    targetPosColStr = inputParsed[1]
+    targetPosCol = posTranslateStrToInt(targetPosColStr)
+    targetPosRow = int(inputParsed[2])
+    # x = Row , Y = Col
 
-    currPiecePosX, currPiecePosY = findPiecePos(board, currPiece)
-    if (currPiecePosX == -1 or currPiecePosY == -1):
+    print("Current move : Row " + str(targetPosRow) + ", Col " + str(targetPosCol) )
+
+    currPiecePosCol, currPiecePosRow = findPiecePos(board, currPiece)
+
+    print("Current piece position : row " + str(currPiecePosRow) + ", Col " + str(currPiecePosCol))
+
+    if (currPiecePosRow == -1 or currPiecePosCol == -1):
         print("Entered piece : " + currPiece + " not found on the board")
-        print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
+        print("Re-enter : expected format is <piece> <targetPosCol> <targetPosRow>")
         userInput = input('\n' + "-> ")
         continue
 
-    if currPiecePosX == targetPosX and currPiecePosY == targetPosY:
-        print("Piece " + currPiece + " current (" + str(currPiecePosX) + ", " + str(currPiecePosY) + ") and target (" + str(targetPosX) + ", " + str(targetPosY) + ") positions are the same")
-        print("Re-enter : expected format is <piece> <targetPosX> <targetPosY>")
+    if currPiecePosRow == targetPosRow and currPiecePosCol == targetPosCol:
+        print("Piece " + currPiece + " current (" + str(currPiecePosRow) + ", " + str(currPiecePosCol) + ") and target (" + str(targetPosRow) + ", " + str(targetPosCol) + ") positions are the same")
+        print("Re-enter : expected format is <piece> <targetPosCol> <targetPosRow>")
         userInput = input('\n' + "-> ")
         continue
 
-    #movePosX, movePosY = checkMove(board, currPiece)
-    #print("Potential move : " + str(movePosX) + ", " + str(movePosY) )
-
-    movePiece(board, currPiece, targetPosX, targetPosY)
+    
+    movePosRow, movePosCol = checkMove(board, currPiece)
+    print("Potential move : " + str(movePosRow) + ", " + str(movePosCol) )
+    
+    if (targetPosRow == movePosRow) and (targetPosCol == movePosCol):
+        movePiece(board, currPiece, targetPosRow, targetPosCol)
+    else:
+        print("Piece " + currPiece + " target (" + str(targetPosCol) + ", " + str(targetPosCol) + ") positions are not available for this piece")
+        print("Re-enter : expected format is <piece> <targetPosCol> <targetPosRow>")
+        userInput = input('\n' + "-> ")
+        continue
+    
+    #movePiece(board, currPiece, targetPosRow, targetPosCol)
     displayBoard(board)
+    print(board)
     userInput = input('\n' + "-> ")
 
