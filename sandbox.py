@@ -4,9 +4,9 @@ from chessSimFuncs import movePiece
 from chessSimFuncs import displayBoard
 from chessSimFuncs import sanitizeInput
 from chessSimFuncs import findPiecePos
-from chessSimFuncs import checkMove
+from chessSimFuncs import checkMoves
 from chessSimFuncs import posTranslateStrToInt  
-from chessSimFuncs import posTranslateIntToStr
+
 
 print("Starting chess simulation")
 print("Input format is : <PieceName> <TargetX> <TargetY")
@@ -84,9 +84,20 @@ while userInput != 'Q':
         userInput = input('\n' + "-> ")
         continue
 
-    movePosRow, movePosCol = checkMove(board, currPiece)
-    print("Potential move : " + str(movePosRow) + ", " + str(movePosCol) )
+    #movePosRow, movePosCol = checkMoves(board, currPiece)
+    availMoves = checkMoves(board, currPiece)
+    print("Potential moves : ")
+    print(availMoves)
+
+    moved = False
+    for i in range(0, len(availMoves)):
+            if (availMoves[i][0] == targetPosRow) and (availMoves[i][1] == targetPosCol):
+                movePiece(board, currPiece, targetPosRow, targetPosCol)
+                moved = True
     
+    if moved == False:
+        print("current move is not an available move for " + str(currPiece))
+    """
     if (targetPosRow == movePosRow) and (targetPosCol == movePosCol):
         movePiece(board, currPiece, targetPosRow, targetPosCol)
     else:
@@ -94,6 +105,7 @@ while userInput != 'Q':
         print("Re-enter : expected format is <piece> <targetPosCol> <targetPosRow>")
         userInput = input('\n' + "-> ")
         continue
+    """
     
     #movePiece(board, currPiece, targetPosRow, targetPosCol)
     displayBoard(board)

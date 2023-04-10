@@ -47,19 +47,28 @@ def checkPos(board, targetPosRow, targetPosCol):
 
 #Determine potential allowed moves for a given piece
 #Note for a white pawn this is +1 however for a black pawn its -1
-def checkMove(board, piece):
+def checkMoves(board, piece):
+    availMoves = []
     #Need to define available moves for all piece types including borders
     if ('pawn' in piece.lower()):
         if (piece[0] == 'W'):
             currPosRow, currPosCol = findPiecePos(board, piece)
             availPosCol = currPosCol
             availPosRow = currPosRow + 1
-            return availPosRow, availPosCol
+            availMoves.append([availPosRow, availPosCol])
+            checkPawnTakeLeft = checkPos(board, availPosRow, availPosCol-1)
+            if  (checkPawnTakeLeft[0] == 'B'):
+                availMoves.append([availPosRow, availPosCol-1])
+            checkPawnTakeRight = checkPos(board, availPosRow, availPosCol+1)
+            if  (checkPawnTakeRight[0] == 'B'):
+                availMoves.append([availPosRow, availPosCol+1])
+            return availMoves
         else:
             currPosRow, currPosCol = findPiecePos(board, piece)
             availPosCol = currPosCol
             availPosRow = currPosRow - 1
-            return availPosRow, availPosCol
+            availMoves.append([availPosRow, availPosCol])
+            return availMoves
     else:
         print("current piece is not a pawn")
         return -1, -1
