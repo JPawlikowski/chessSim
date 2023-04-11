@@ -2,6 +2,7 @@
 def movePiece(board, piece, targetPosRow, targetPosCol):
     #add a section to check targetPosition is viable and not same
     currPiecePosRow, currPiecePosCol = findPiecePos(board, piece)
+    
     updatePos(board, piece, targetPosRow, targetPosCol)
 
 #Given board and piece find current piece position
