@@ -2,7 +2,6 @@
 def movePiece(board, piece, targetPosRow, targetPosCol):
     #add a section to check targetPosition is viable and not same
     currPiecePosRow, currPiecePosCol = findPiecePos(board, piece)
-
     updatePos(board, piece, targetPosRow, targetPosCol)
 
 #Given board and piece find current piece position
@@ -68,6 +67,12 @@ def checkMoves(board, piece):
             availPosCol = currPosCol
             availPosRow = currPosRow - 1
             availMoves.append([availPosRow, availPosCol])
+            checkPawnTakeLeft = checkPos(board, availPosRow, availPosCol-1)
+            if  (checkPawnTakeLeft[0] == 'W'):
+                availMoves.append([availPosRow, availPosCol-1])
+            checkPawnTakeRight = checkPos(board, availPosRow, availPosCol+1)
+            if  (checkPawnTakeRight[0] == 'W'):
+                availMoves.append([availPosRow, availPosCol+1])
             return availMoves
     else:
         print("current piece is not a pawn")
