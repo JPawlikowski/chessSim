@@ -2,7 +2,7 @@
 def movePiece(board, piece, targetPosRow, targetPosCol):
     #add a section to check targetPosition is viable and not same
     currPiecePosRow, currPiecePosCol = findPiecePos(board, piece)
-    
+
     updatePos(board, piece, targetPosRow, targetPosCol)
 
 #Given board and piece find current piece position
@@ -75,8 +75,24 @@ def checkMoves(board, piece):
             if  (checkPawnTakeRight[0] == 'W'):
                 availMoves.append([availPosRow, availPosCol+1])
             return availMoves
+        
+    #Rook and bishop will need separate logic for takes
+    elif ('bishop' in piece.lower()):
+        availPosCol = range(0, len(board))
+        availPosRow = range(0, len(board[0]))
+        for i in range(0, len(availPosCol)):
+            availMoves.append([availPosRow[i], availPosCol[i]])
+        return availMoves
+    
+    elif ('rook' in piece.lower()):
+        currPosRow, currPosCol = findPiecePos(board, piece)
+        for i in range(0, len(board)):
+            availMoves.append([currPosRow, i])
+        for i in range(0, len(board[0])):
+            availMoves.append([i, currPosCol])
+        return availMoves
     else:
-        print("current piece is not a pawn")
+        print("current piece is not a pawn or rook")
         return -1, -1
 
 def posTranslateStrToInt(targetPosColStr):
