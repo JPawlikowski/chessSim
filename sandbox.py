@@ -95,8 +95,11 @@ while userInput != 'Q':
     moved = False
     for i in range(0, len(availMoves)):
             if (availMoves[i][0] == targetPosRow) and (availMoves[i][1] == targetPosCol):
-                movePiece(board, currPiece, targetPosRow, targetPosCol)
-                moved = True
+                movedStatus = movePiece(board, currPiece, targetPosRow, targetPosCol)
+                if (movedStatus == 0):
+                    moved = True
+                else:
+                    moved = False
     
     if moved == False:
         print("current move is not an available move for " + str(currPiece))

@@ -1,9 +1,23 @@
-
+#Added return for status, 0 for success (moved) and -1 for not moved due to same color target and source pieces
 def movePiece(board, piece, targetPosRow, targetPosCol):
     #add a section to check targetPosition is viable and not same
     currPiecePosRow, currPiecePosCol = findPiecePos(board, piece)
 
-    updatePos(board, piece, targetPosRow, targetPosCol)
+    if (piece[0] == 'W'):
+        targetPosPiece = checkPos(board, targetPosRow, targetPosCol)
+        if (targetPosPiece[0] == 'W'):
+            return -1
+        else:
+            updatePos(board, piece, targetPosRow, targetPosCol)
+            return 0
+    
+    if (piece[0] == 'B'):
+        targetPosPiece = checkPos(board, targetPosRow, targetPosCol)
+        if (targetPosPiece[0] == 'B'):
+            return -1
+        else:
+            updatePos(board, piece, targetPosRow, targetPosCol)
+            return 0
 
 #Given board and piece find current piece position
 def findPiecePos(board, piece):
