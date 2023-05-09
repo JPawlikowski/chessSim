@@ -61,6 +61,7 @@ def checkPos(board, targetPosRow, targetPosCol):
 
 #Determine potential allowed moves for a given piece
 #Note for a white pawn this is +1 however for a black pawn its -1
+#May 8th: Bishop and Rook can jump over other pieces
 def checkMoves(board, piece):
     availMoves = []
     #Need to define available moves for all piece types including borders
@@ -100,11 +101,58 @@ def checkMoves(board, piece):
     
     elif ('rook' in piece.lower()):
         currPosRow, currPosCol = findPiecePos(board, piece)
-        for i in range(0, len(board)):
-            availMoves.append([currPosRow, i])
-        for i in range(0, len(board[0])):
-            availMoves.append([i, currPosCol])
+        #All rows going up
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosRow+moveIncr >= len(board[0])):
+                break
+            posPiece = checkPos(board, currPosRow+moveIncr, currPosCol)
+            availMoves.append([currPosRow+moveIncr, currPosCol])
+            moveIncr = moveIncr + 1
+            continue
+
+        #All rows going right
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosCol+moveIncr >= len(board[0])):
+                break
+            posPiece = checkPos(board, currPosRow, currPosCol+moveIncr)
+            availMoves.append([currPosRow, currPosCol+moveIncr])
+            moveIncr = moveIncr + 1
+            continue
+
+        #All rows going down
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosRow-moveIncr < 0):
+                break
+            posPiece = checkPos(board, currPosRow-moveIncr, currPosCol)
+            availMoves.append([currPosRow-moveIncr, currPosCol])
+            moveIncr = moveIncr + 1
+            continue
+
+        #All rows going left
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosCol-moveIncr < 0):
+                break
+            posPiece = checkPos(board, currPosRow, currPosCol-moveIncr)
+            availMoves.append([currPosRow, currPosCol-moveIncr])
+            moveIncr = moveIncr + 1
+            continue
+
         return availMoves
+    #elif ('rook' in piece.lower()):
+    #    currPosRow, currPosCol = findPiecePos(board, piece)
+    #    for i in range(0, len(board)):
+    #        availMoves.append([currPosRow, i])
+    #    for i in range(0, len(board[0])):
+    #        availMoves.append([i, currPosCol])
+    #    return availMoves
     else:
         print("current piece is not a pawn or rook")
         return -1, -1
