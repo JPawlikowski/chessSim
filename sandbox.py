@@ -17,7 +17,14 @@ print("Enter 'Q' to exit")
 
 #board = [['WRook1', 'WRook2', 'WRook3', 'WRook4'], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BRook1', 'BRook2', 'BRook3', 'BRook4']]
 
-board = [['WKnight1', 'WRook2', 'WQueen1', 'WBishop4'], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BBishop1', 'BQueen1', 'BRook3', 'BKnight4']]
+board = [['WRook1', 'WKnight1', 'WBishop1', 'WQueen1', ' ', 'WBishop2', 'WKnight2', 'WRook2'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        ['BRook1', 'BKnight1', 'BBishop1', 'BQueen1', ' ', 'BBishop2', 'BKnight2', 'BRook2']]
 
 
 currentMoveWhite = True

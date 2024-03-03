@@ -95,21 +95,20 @@ def checkMoves(board, piece):
     #Rook and bishop will need separate logic for takes
     if ('bishop' in piece.lower() or 'queen' in piece.lower()):
         print("Finding available moves for bishop or queen")
-        #OLD
-        # availPosCol = range(0, len(board))
-        # availPosRow = range(0, len(board[0]))
-        # for i in range(0, len(availPosCol)):
-        #     availMoves.append([availPosRow[i], availPosCol[i]])
-
-
+    
         currPosRow, currPosCol = findPiecePos(board, piece)
         #All diagonals going right and up
         posPiece = ' '
         moveIncr = 1
+
+        print("Length of board[0]" + str(len(board[0])))
+        print("Length of board[0][0]" + str(len(board[0][0])))
+        print("next column check" + str(currPosCol+moveIncr))
+        print("next row check" + str(currPosRow+moveIncr))
         while posPiece == ' ':
             if (currPosRow+moveIncr >= len(board[0])):
                 break
-            if (currPosCol+moveIncr >= len(board[0])):
+            if (currPosCol+moveIncr >= len(board[0][0])):
                 break
             else: 
                 posPiece = checkPos(board, currPosRow+moveIncr, currPosCol+moveIncr)
@@ -123,7 +122,7 @@ def checkMoves(board, piece):
         while posPiece == ' ':
             if (currPosRow+moveIncr >= len(board[0])):
                 break
-            if (currPosCol-moveIncr >= len(board[0])):
+            if (currPosCol-moveIncr < 0):
                 break
             else: 
                 posPiece = checkPos(board, currPosRow+moveIncr, currPosCol-moveIncr)
@@ -135,9 +134,9 @@ def checkMoves(board, piece):
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
-            if (currPosRow-moveIncr >= len(board[0])):
+            if (currPosRow-moveIncr < 0):
                 break
-            if (currPosCol-moveIncr >= len(board[0])):
+            if (currPosCol-moveIncr < 0):
                 break
             else: 
                 posPiece = checkPos(board, currPosRow-moveIncr, currPosCol-moveIncr)
@@ -149,9 +148,9 @@ def checkMoves(board, piece):
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
-            if (currPosRow-moveIncr >= len(board[0])):
+            if (currPosRow-moveIncr < 0):
                 break
-            if (currPosCol+moveIncr >= len(board[0])):
+            if (currPosCol+moveIncr >= len(board[0][0])):
                 break
             else: 
                 posPiece = checkPos(board, currPosRow-moveIncr, currPosCol+moveIncr)
@@ -272,7 +271,7 @@ def checkMoves(board, piece):
         lowerLeftRow = currPosRow - 1
         lowerLeftCol = currPosCol - 2
         if (lowerLeftRow < len(board[0])):
-            if (bottomLeftCol < len(board[0])):
+            if (lowerLeftCol < len(board[0])):
                 posPiece = checkPos(board, lowerLeftRow, lowerLeftCol)
                 if posPiece == ' ':
                     print("Lower left target position is empty")
@@ -291,8 +290,11 @@ def checkMoves(board, piece):
         #UPPER LEFT
         upperLeftRow = currPosRow + 1
         upperLeftCol = currPosCol - 2
-        if (lowerLeftRow < len(board[0])):
-            if (bottomLeftCol < len(board[0])):
+        if (upperLeftRow < len(board[0])):
+            if (upperLeftCol < len(board[0][0])):
+                print(str(len(board[0]) - 1))
+                print(str(upperLeftRow))
+                print(str(upperLeftCol))
                 posPiece = checkPos(board, upperLeftRow, upperLeftCol)
                 if posPiece == ' ':
                     print("Upper left target position is empty")
@@ -337,7 +339,7 @@ def checkMoves(board, piece):
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
-            if (currPosRow+moveIncr >= len(board[0])):
+            if (currPosRow+moveIncr > len(board[0])):
                 break
             posPiece = checkPos(board, currPosRow+moveIncr, currPosCol)
             availMoves.append([currPosRow+moveIncr, currPosCol])
@@ -348,7 +350,7 @@ def checkMoves(board, piece):
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
-            if (currPosCol+moveIncr >= len(board[0])):
+            if (currPosCol+moveIncr > len(board[0][0])):
                 break
             posPiece = checkPos(board, currPosRow, currPosCol+moveIncr)
             availMoves.append([currPosRow, currPosCol+moveIncr])
