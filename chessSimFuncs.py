@@ -99,6 +99,55 @@ def checkMoves(board, piece):
             availMoves.append([availPosRow[i], availPosCol[i]])
         return availMoves
     
+    #Consider checking if target position contains piece of same color then its not available
+    #TODO: This needs border checks
+    elif ('knight' in piece.lower()):
+        #Consider 8 possible moves of a knight, clockwise starting from the top
+        currPosRow, currPosCol = findPiecePos(board, piece)
+        print("Current piece color : " + piece[0])
+
+        #TOP RIGHT
+        topRightRow = currPosRow + 2
+        topRightCol = currPosCol + 1
+        if (topRightRow < len(board[0])):
+            if (topRightCol < len(board[0])):
+                posPiece = checkPos(board, topRightRow, topRightCol)
+                if posPiece == ' ':
+                    print("Current target position is empty")
+                    availMoves.append([topRightRow, topRightCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Top right move contains piece of different color, move appended")
+                    availMoves.append([topRightRow, topRightCol])
+                else:
+                    print("Current piece and top right position are same color")
+            else:
+                print("Top right position is off board by column")
+        else:
+            print("Top right position is off board by row")
+
+        #UPPER RIGHT
+        upperRightRow = currPosRow + 1
+        upperRightCol = currPosCol + 2
+        if (upperRightRow < len(board[0])):
+            if (upperRightCol < len(board[0])):
+                posPiece = checkPos(board, upperRightRow, upperRightCol)
+                if posPiece == ' ':
+                    print("Current target position is empty")
+                    availMoves.append([upperRightRow, upperRightCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Upper right move contains piece of different color, move appended")
+                    availMoves.append([upperRightRow, upperRightCol])
+                else:
+                    print("Current piece and upper right position are same color")
+            else:
+                print("Upper right position is off board by column")
+        else:
+            print("Upper right position is off board by row")
+
+        return availMoves
+    
     elif ('rook' in piece.lower()):
         currPosRow, currPosCol = findPiecePos(board, piece)
         #All rows going up
@@ -154,7 +203,7 @@ def checkMoves(board, piece):
     #        availMoves.append([i, currPosCol])
     #    return availMoves
     else:
-        print("current piece is not a pawn or rook")
+        print("current piece is not a pawn / rook / bishop")
         return -1, -1
 
 def posTranslateStrToInt(targetPosColStr):
