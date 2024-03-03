@@ -100,7 +100,7 @@ def checkMoves(board, piece):
         return availMoves
     
     #Consider checking if target position contains piece of same color then its not available
-    #TODO: This needs border checks
+    #TODO: This needs border checks for left and down sides
     elif ('knight' in piece.lower()):
         #Consider 8 possible moves of a knight, clockwise starting from the top
         currPosRow, currPosCol = findPiecePos(board, piece)
@@ -113,7 +113,7 @@ def checkMoves(board, piece):
             if (topRightCol < len(board[0])):
                 posPiece = checkPos(board, topRightRow, topRightCol)
                 if posPiece == ' ':
-                    print("Current target position is empty")
+                    print("Top right target position is empty")
                     availMoves.append([topRightRow, topRightCol])
                 elif (posPiece[0] != piece[0]):
                     #Current piece color DIFFERENT than color of piece in position
@@ -133,7 +133,7 @@ def checkMoves(board, piece):
             if (upperRightCol < len(board[0])):
                 posPiece = checkPos(board, upperRightRow, upperRightCol)
                 if posPiece == ' ':
-                    print("Current target position is empty")
+                    print("Upper right target position is empty")
                     availMoves.append([upperRightRow, upperRightCol])
                 elif (posPiece[0] != piece[0]):
                     #Current piece color DIFFERENT than color of piece in position
@@ -145,6 +145,126 @@ def checkMoves(board, piece):
                 print("Upper right position is off board by column")
         else:
             print("Upper right position is off board by row")
+
+        #LOWER RIGHT
+        lowerRightRow = currPosRow - 1
+        lowerRightCol = currPosCol + 2
+        if (lowerRightRow < len(board[0])):
+            if (lowerRightCol < len(board[0])):
+                posPiece = checkPos(board, lowerRightRow, lowerRightCol)
+                if posPiece == ' ':
+                    print("Lower right target position is empty")
+                    availMoves.append([lowerRightRow, lowerRightCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Lower right move contains piece of different color, move appended")
+                    availMoves.append([lowerRightRow, lowerRightCol])
+                else:
+                    print("Current piece and lower right position are same color")
+            else:
+                print("Lower right position is off board by column")
+        else:
+            print("Lower right position is off board by row")
+
+        #BOTTOM RIGHT
+        bottomRightRow = currPosRow - 2
+        bottomRightCol = currPosCol + 1
+        if (bottomRightRow < len(board[0])):
+            if (bottomRightCol < len(board[0])):
+                posPiece = checkPos(board, bottomRightRow, bottomRightCol)
+                if posPiece == ' ':
+                    print("Bottom right target position is empty")
+                    availMoves.append([bottomRightRow, bottomRightCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Bottom right move contains piece of different color, move appended")
+                    availMoves.append([bottomRightRow, bottomRightCol])
+                else:
+                    print("Current piece and bottom right position are same color")
+            else:
+                print("Bottom right position is off board by column")
+        else:
+            print("Bottom right position is off board by row")
+
+        #BOTTOM LEFT
+        bottomLeftRow = currPosRow - 2
+        bottomLeftCol = currPosCol - 1
+        if (bottomLeftRow < len(board[0])):
+            if (bottomLeftCol < len(board[0])):
+                posPiece = checkPos(board, bottomLeftRow, bottomLeftCol)
+                if posPiece == ' ':
+                    print("Bottom left target position is empty")
+                    availMoves.append([bottomLeftRow, bottomLeftCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Bottom left move contains piece of different color, move appended")
+                    availMoves.append([bottomLeftRow, bottomLeftCol])
+                else:
+                    print("Current piece and bottom left position are same color")
+            else:
+                print("Bottom left position is off board by column")
+        else:
+            print("Bottom left position is off board by row")
+
+        #LOWER LEFT
+        lowerLeftRow = currPosRow - 1
+        lowerLeftCol = currPosCol - 2
+        if (lowerLeftRow < len(board[0])):
+            if (bottomLeftCol < len(board[0])):
+                posPiece = checkPos(board, lowerLeftRow, lowerLeftCol)
+                if posPiece == ' ':
+                    print("Lower left target position is empty")
+                    availMoves.append([lowerLeftRow, lowerLeftCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Lower left move contains piece of different color, move appended")
+                    availMoves.append([lowerLeftRow, lowerLeftCol])
+                else:
+                    print("Current piece and lower left position are same color")
+            else:
+                print("Lower left position is off board by column")
+        else:
+            print("Lower left position is off board by row")
+
+        #UPPER LEFT
+        upperLeftRow = currPosRow + 1
+        upperLeftCol = currPosCol - 2
+        if (lowerLeftRow < len(board[0])):
+            if (bottomLeftCol < len(board[0])):
+                posPiece = checkPos(board, upperLeftRow, upperLeftCol)
+                if posPiece == ' ':
+                    print("Upper left target position is empty")
+                    availMoves.append([upperLeftRow, upperLeftCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Upper left move contains piece of different color, move appended")
+                    availMoves.append([upperLeftRow, upperLeftCol])
+                else:
+                    print("Current piece and upper left position are same color")
+            else:
+                print("Upper left position is off board by column")
+        else:
+            print("Upper left position is off board by row")
+
+        #TOP LEFT
+        topLeftRow = currPosRow + 2
+        topLeftCol = currPosCol - 1
+        if (topLeftRow < len(board[0])):
+            if (topLeftCol < len(board[0])):
+                posPiece = checkPos(board, topLeftRow, topLeftCol)
+                if posPiece == ' ':
+                    print("Top left target position is empty")
+                    availMoves.append([topLeftRow, topLeftCol])
+                elif (posPiece[0] != piece[0]):
+                    #Current piece color DIFFERENT than color of piece in position
+                    print("Top left move contains piece of different color, move appended")
+                    availMoves.append([topLeftRow, topLeftCol])
+                else:
+                    print("Current piece and top left position are same color")
+            else:
+                print("Top left position is off board by column")
+        else:
+            print("Top left position is off board by row")
 
         return availMoves
     
