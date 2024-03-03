@@ -66,6 +66,7 @@ def checkMoves(board, piece):
     availMoves = []
     #Need to define available moves for all piece types including borders
     if ('pawn' in piece.lower()):
+        print("Finding available moves for pawn")
         if (piece[0] == 'W'):
             currPosRow, currPosCol = findPiecePos(board, piece)
             availPosCol = currPosCol
@@ -77,7 +78,7 @@ def checkMoves(board, piece):
             checkPawnTakeRight = checkPos(board, availPosRow, availPosCol+1)
             if  (checkPawnTakeRight[0] == 'B'):
                 availMoves.append([availPosRow, availPosCol+1])
-            return availMoves
+            #return availMoves
         else:
             currPosRow, currPosCol = findPiecePos(board, piece)
             availPosCol = currPosCol
@@ -89,19 +90,80 @@ def checkMoves(board, piece):
             checkPawnTakeRight = checkPos(board, availPosRow, availPosCol+1)
             if  (checkPawnTakeRight[0] == 'W'):
                 availMoves.append([availPosRow, availPosCol+1])
-            return availMoves
+            #return availMoves
         
     #Rook and bishop will need separate logic for takes
-    elif ('bishop' in piece.lower()):
-        availPosCol = range(0, len(board))
-        availPosRow = range(0, len(board[0]))
-        for i in range(0, len(availPosCol)):
-            availMoves.append([availPosRow[i], availPosCol[i]])
-        return availMoves
+    if ('bishop' in piece.lower() or 'queen' in piece.lower()):
+        print("Finding available moves for bishop or queen")
+        #OLD
+        # availPosCol = range(0, len(board))
+        # availPosRow = range(0, len(board[0]))
+        # for i in range(0, len(availPosCol)):
+        #     availMoves.append([availPosRow[i], availPosCol[i]])
+
+
+        currPosRow, currPosCol = findPiecePos(board, piece)
+        #All diagonals going right and up
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosRow+moveIncr >= len(board[0])):
+                break
+            if (currPosCol+moveIncr >= len(board[0])):
+                break
+            else: 
+                posPiece = checkPos(board, currPosRow+moveIncr, currPosCol+moveIncr)
+                availMoves.append([currPosRow+moveIncr, currPosCol+moveIncr])
+                moveIncr = moveIncr + 1
+            continue
+
+        #All diagonals going right and down
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosRow+moveIncr >= len(board[0])):
+                break
+            if (currPosCol-moveIncr >= len(board[0])):
+                break
+            else: 
+                posPiece = checkPos(board, currPosRow+moveIncr, currPosCol-moveIncr)
+                availMoves.append([currPosRow+moveIncr, currPosCol-moveIncr])
+                moveIncr = moveIncr + 1
+            continue
+
+        #All diagonals going left and down
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosRow-moveIncr >= len(board[0])):
+                break
+            if (currPosCol-moveIncr >= len(board[0])):
+                break
+            else: 
+                posPiece = checkPos(board, currPosRow-moveIncr, currPosCol-moveIncr)
+                availMoves.append([currPosRow-moveIncr, currPosCol-moveIncr])
+                moveIncr = moveIncr + 1
+            continue
+
+        #All diagonals going left and up
+        posPiece = ' '
+        moveIncr = 1
+        while posPiece == ' ':
+            if (currPosRow-moveIncr >= len(board[0])):
+                break
+            if (currPosCol+moveIncr >= len(board[0])):
+                break
+            else: 
+                posPiece = checkPos(board, currPosRow-moveIncr, currPosCol+moveIncr)
+                availMoves.append([currPosRow-moveIncr, currPosCol+moveIncr])
+                moveIncr = moveIncr + 1
+            continue
+       #return availMoves
     
     #Consider checking if target position contains piece of same color then its not available
-    #TODO: This needs border checks for left and down sides
-    elif ('knight' in piece.lower()):
+    #TODO: UPDATE checking if target position contains same color is already done as part of MOVE function, can remove it from here
+    if ('knight' in piece.lower()):
+        print("Finding available moves for knight")
         #Consider 8 possible moves of a knight, clockwise starting from the top
         currPosRow, currPosCol = findPiecePos(board, piece)
         print("Current piece color : " + piece[0])
@@ -266,9 +328,10 @@ def checkMoves(board, piece):
         else:
             print("Top left position is off board by row")
 
-        return availMoves
+        #return availMoves
     
-    elif ('rook' in piece.lower()):
+    if ('rook' in piece.lower() or 'queen' in piece.lower()):
+        print("Finding available moves for rook or queen")
         currPosRow, currPosCol = findPiecePos(board, piece)
         #All rows going up
         posPiece = ' '
@@ -314,16 +377,12 @@ def checkMoves(board, piece):
             moveIncr = moveIncr + 1
             continue
 
+        #return availMoves
+
+    if (len(availMoves) > 1):
         return availMoves
-    #elif ('rook' in piece.lower()):
-    #    currPosRow, currPosCol = findPiecePos(board, piece)
-    #    for i in range(0, len(board)):
-    #        availMoves.append([currPosRow, i])
-    #    for i in range(0, len(board[0])):
-    #        availMoves.append([i, currPosCol])
-    #    return availMoves
     else:
-        print("current piece is not a pawn / rook / bishop")
+        print("current piece is not a pawn / rook / bishop / queen")
         return -1, -1
 
 def posTranslateStrToInt(targetPosColStr):

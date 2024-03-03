@@ -9,6 +9,7 @@ from chessSimFuncs import posTranslateStrToInt
 
 
 print("Starting chess simulation")
+print("THERE IS AN ISSUE WITH FLIPPED COLUMN AND ROW SOMEWHERE")
 print("Input format is : <PieceName> <TargetX> <TargetY")
 print("Enter 'Q' to exit")
 
@@ -16,7 +17,8 @@ print("Enter 'Q' to exit")
 
 #board = [['WRook1', 'WRook2', 'WRook3', 'WRook4'], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BRook1', 'BRook2', 'BRook3', 'BRook4']]
 
-board = [['WKnight1', 'WRook2', 'WRook3', 'WRook4'], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BRook1', 'BRook2', 'BRook3', 'BRook4']]#
+board = [['WKnight1', 'WRook2', 'WQueen1', 'WBishop4'], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BBishop1', 'BQueen1', 'BRook3', 'BKnight4']]
+
 
 currentMoveWhite = True
 
@@ -75,7 +77,7 @@ while userInput != 'Q':
 
     currPiecePosCol, currPiecePosRow = findPiecePos(board, currPiece)
 
-    print("Current piece position : row " + str(currPiecePosRow) + ", Col " + str(currPiecePosCol))
+    print("Current piece position : row " + str(currPiecePosCol) + ", Col " + str(currPiecePosRow))
 
     if (currPiecePosRow == -1 or currPiecePosCol == -1):
         print("Entered piece : " + currPiece + " not found on the board")
