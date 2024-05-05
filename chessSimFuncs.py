@@ -339,23 +339,26 @@ def checkMoves(board, piece):
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
-            if (currPosRow+moveIncr > len(board[0])):
+            if (currPosRow+moveIncr >= len(board[0])):
                 break
             posPiece = checkPos(board, currPosRow+moveIncr, currPosCol)
             availMoves.append([currPosRow+moveIncr, currPosCol])
             moveIncr = moveIncr + 1
             continue
-
-        #All rows going right
+        print("Found all moves going up: " + str(availMoves))
+        print("Baord length " + str(len(board[0])))
+        #All columns going right
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
-            if (currPosCol+moveIncr > len(board[0][0])):
+            if (currPosCol+moveIncr >= len(board[0])):
                 break
+            print("Adding move to the right..")
             posPiece = checkPos(board, currPosRow, currPosCol+moveIncr)
             availMoves.append([currPosRow, currPosCol+moveIncr])
             moveIncr = moveIncr + 1
             continue
+        print("Found all moves going right: " + str(availMoves))
 
         #All rows going down
         posPiece = ' '
@@ -367,8 +370,9 @@ def checkMoves(board, piece):
             availMoves.append([currPosRow-moveIncr, currPosCol])
             moveIncr = moveIncr + 1
             continue
+        print("Found all moves going down: " + str(availMoves))
 
-        #All rows going left
+        #All columns going left
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
@@ -378,6 +382,7 @@ def checkMoves(board, piece):
             availMoves.append([currPosRow, currPosCol-moveIncr])
             moveIncr = moveIncr + 1
             continue
+        print("Found all moves going left: " + str(availMoves))
 
         #return availMoves
 

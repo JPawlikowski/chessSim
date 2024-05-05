@@ -138,4 +138,3 @@ while userInput != 'Q':
         currentMoveWhite = True
         print("White to move")
     userInput = input('\n' + "-> ")
-
