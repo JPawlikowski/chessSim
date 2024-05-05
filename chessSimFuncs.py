@@ -24,7 +24,7 @@ def findPiecePos(board, piece):
     for i in range(0, len(board)):
         for j in range(0, len(board[i])):
             if board[i][j].lower() == piece.lower():
-                print("Found " + piece + " at : row " + str(i) + ", Col " + str(j))
+                print("Found " + piece + " at : Col " + str(j) + ", Row " + str(i))
                 return i, j
     print("Piece " + str(piece) + " not found")
     return -1, -1
@@ -101,14 +101,17 @@ def checkMoves(board, piece):
         posPiece = ' '
         moveIncr = 1
 
-        print("Length of board[0]" + str(len(board[0])))
-        print("Length of board[0][0]" + str(len(board[0][0])))
-        print("next column check" + str(currPosCol+moveIncr))
-        print("next row check" + str(currPosRow+moveIncr))
+        print("Length of board[0] " + str(len(board[0])))
+        #this used to be str(len(board[0][0]) but it somehow returned 6? Get back to check correct width and height of board (05/05/2024)
+        print("Length of board[0][0] " + str(len(board[0])))
+        
+        print("ALL DIAG RIGHT AND UP")
         while posPiece == ' ':
+            print("next row check " + str(currPosRow+moveIncr))
             if (currPosRow+moveIncr >= len(board[0])):
                 break
-            if (currPosCol+moveIncr >= len(board[0][0])):
+            print("next column check " + str(currPosCol+moveIncr))
+            if (currPosCol+moveIncr >= len(board[0])):
                 break
             else: 
                 posPiece = checkPos(board, currPosRow+moveIncr, currPosCol+moveIncr)
@@ -116,12 +119,15 @@ def checkMoves(board, piece):
                 moveIncr = moveIncr + 1
             continue
 
-        #All diagonals going right and down
+        #All diagonals going left and up
+        print("ALL DIAG LEFT AND UP")
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
+            print("next row: " + str(currPosRow+moveIncr))
             if (currPosRow+moveIncr >= len(board[0])):
                 break
+            print("Next col: " + str(currPosCol-moveIncr))
             if (currPosCol-moveIncr < 0):
                 break
             else: 
@@ -131,11 +137,14 @@ def checkMoves(board, piece):
             continue
 
         #All diagonals going left and down
+        print("ALL DIAG LEFT AND DOWN")
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
+            print("next row: " + str(currPosRow+moveIncr))
             if (currPosRow-moveIncr < 0):
                 break
+            print("next col: " + str(currPosCol-moveIncr))
             if (currPosCol-moveIncr < 0):
                 break
             else: 
@@ -144,13 +153,16 @@ def checkMoves(board, piece):
                 moveIncr = moveIncr + 1
             continue
 
-        #All diagonals going left and up
+        #All diagonals going right and down
+        print("ALL DIAG RIGHT AND DOWN")
         posPiece = ' '
         moveIncr = 1
         while posPiece == ' ':
+            print("next row: " + str(currPosRow-moveIncr))
             if (currPosRow-moveIncr < 0):
                 break
-            if (currPosCol+moveIncr >= len(board[0][0])):
+            print("next col: " + str(currPosCol+moveIncr))
+            if (currPosCol+moveIncr >= len(board[0])):
                 break
             else: 
                 posPiece = checkPos(board, currPosRow-moveIncr, currPosCol+moveIncr)
@@ -346,7 +358,7 @@ def checkMoves(board, piece):
             moveIncr = moveIncr + 1
             continue
         print("Found all moves going up: " + str(availMoves))
-        print("Baord length " + str(len(board[0])))
+
         #All columns going right
         posPiece = ' '
         moveIncr = 1

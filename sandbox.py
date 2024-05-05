@@ -10,6 +10,7 @@ from chessSimFuncs import posTranslateStrToInt
 
 print("Starting chess simulation")
 print("THERE IS AN ISSUE WITH FLIPPED COLUMN AND ROW SOMEWHERE")
+print("UPDATE 05/05/2024 - I think this is FIXED, updated findPosPiece, swtiched I and J")
 print("Input format is : <PieceName> <TargetX> <TargetY")
 print("Enter 'Q' to exit")
 
@@ -80,11 +81,11 @@ while userInput != 'Q':
     targetPosRow = int(inputParsed[2])
     # x = Row , Y = Col
 
-    print("Current move : Row " + str(targetPosRow) + ", Col " + str(targetPosCol) )
+    print("Current move : Col " + str(targetPosCol) + ", Row " + str(targetPosRow) )
 
-    currPiecePosCol, currPiecePosRow = findPiecePos(board, currPiece)
+    currPiecePosRow, currPiecePosCol = findPiecePos(board, currPiece)
 
-    print("Current piece position : row " + str(currPiecePosCol) + ", Col " + str(currPiecePosRow))
+    print("Current piece position : Col " + str(currPiecePosCol) + ", Row " + str(currPiecePosRow))
 
     if (currPiecePosRow == -1 or currPiecePosCol == -1):
         print("Entered piece : " + currPiece + " not found on the board")
@@ -93,7 +94,7 @@ while userInput != 'Q':
         continue
 
     if currPiecePosRow == targetPosRow and currPiecePosCol == targetPosCol:
-        print("Piece " + currPiece + " current (" + str(currPiecePosRow) + ", " + str(currPiecePosCol) + ") and target (" + str(targetPosRow) + ", " + str(targetPosCol) + ") positions are the same")
+        print("Piece " + currPiece + " current (" + str(currPiecePosCol) + ", " + str(currPiecePosRow) + ") and target (" + str(targetPosCol) + ", " + str(targetPosRow) + ") positions are the same")
         print("Re-enter : expected format is <piece> <targetPosCol> <targetPosRow>")
         userInput = input('\n' + "-> ")
         continue
