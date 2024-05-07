@@ -18,14 +18,23 @@ print("Enter 'Q' to exit")
 
 #board = [['WRook1', 'WRook2', 'WRook3', 'WRook4'], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], ['BRook1', 'BRook2', 'BRook3', 'BRook4']]
 
-board = [['WRook1', 'WKnight1', 'WBishop1', 'WQueen1', ' ', 'WBishop2', 'WKnight2', 'WRook2'],
+board = [['WRook1', 'WKnight1', 'WBishop1', 'WQueen1', 'WKing1', 'WBishop2', 'WKnight2', 'WRook2'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        ['BRook1', 'BKnight1', 'BBishop1', 'BQueen1', ' ', 'BBishop2', 'BKnight2', 'BRook2']]
+        ['BRook1', 'BKnight1', 'BBishop1', 'BQueen1', 'BKing2', 'BBishop2', 'BKnight2', 'BRook2']]
+
+# board = [['WRook1', 'WKnight1', 'WBishop1', 'WQueen1', 'WKing1', 'WBishop2', 'WKnight2', 'WRook2'],
+#         ['WPawn1', 'WPawn2', 'WPawn3', 'WPawn4', 'WPawn5', 'WPawn6', 'WPawn7', 'WPawn8'],
+#         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+#         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+#         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+#         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+#         ['BPawn1', 'BPawn2', 'BPawn3', 'BPawn4', 'BPawn5', 'BPawn6', 'BPawn7', 'BPawn8'],
+#         ['BRook1', 'BKnight1', 'BBishop1', 'BQueen1', 'BKing2', 'BBishop2', 'BKnight2', 'BRook2']]
 
 
 currentMoveWhite = True

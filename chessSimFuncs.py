@@ -396,7 +396,42 @@ def checkMoves(board, piece):
             continue
         print("Found all moves going left: " + str(availMoves))
 
-        #return availMoves
+    if ('king' in piece.lower()):
+        print("Finding available moves for king")
+        currPosRow, currPosCol = findPiecePos(board, piece)
+        posPiece = ' '
+        moveIncr = 1
+        #Move right 1 column
+        if (currPosCol+moveIncr <= len(board[0])):
+            availMoves.append([currPosRow, currPosCol+moveIncr])
+
+        #Move upper right
+        if (currPosCol+moveIncr <= len(board[0]) and currPosRow+moveIncr <= len(board[0])):
+            availMoves.append([currPosRow+moveIncr, currPosCol+moveIncr])
+
+        #Move up 1 row
+        if (currPosRow+moveIncr <= len(board[0])):
+            availMoves.append([currPosRow+moveIncr, currPosCol])
+
+        #Move upper left
+        if (currPosCol-moveIncr <= len(board[0]) and currPosRow+moveIncr <= len(board[0])):
+            availMoves.append([currPosRow+moveIncr, currPosCol-moveIncr])
+
+        #Move Left 1 column
+        if (currPosCol-moveIncr <= len(board[0])):
+            availMoves.append([currPosRow, currPosCol-moveIncr])
+
+        #Move lower left
+        if (currPosCol-moveIncr <= len(board[0]) and currPosRow-moveIncr <= len(board[0])):
+            availMoves.append([currPosRow-moveIncr, currPosCol-moveIncr])
+
+        #Move Down 1 row
+        if (currPosRow-moveIncr <= len(board[0])):
+            availMoves.append([currPosRow-moveIncr, currPosCol])
+
+        #Move lower right
+        if (currPosCol+moveIncr <= len(board[0]) and currPosRow-moveIncr <= len(board[0])):
+            availMoves.append([currPosRow-moveIncr, currPosCol+moveIncr])
 
     if (len(availMoves) > 1):
         return availMoves
